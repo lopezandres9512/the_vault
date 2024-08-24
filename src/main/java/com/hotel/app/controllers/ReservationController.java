@@ -1,4 +1,4 @@
-package com.hotel.app.reservations.controllers;
+package com.hotel.app.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

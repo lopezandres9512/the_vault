@@ -12,8 +12,8 @@ import lombok.Data;
 public class Habitacion {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer idhabitacion;
+//    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private Long idHabitacion;
 
-    private String estadohabitacion;
+    private String nombreHabitacion;
 }

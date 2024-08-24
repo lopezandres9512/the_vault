@@ -1,13 +1,6 @@
 package com.hotel.app.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -16,17 +9,16 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "reservas")
 public class Reserva {
-
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idhabitacion", foreignKey = @ForeignKey(name = "fk_reserva_habitacion"))
+//    @JoinColumn(name = "idhabitacion", foreignKey = @ForeignKey(name = "fk_reserva_habitacion"))
     private Habitacion habitacion;
 
-    @Column(name = "numero_de_habitaciones")
-    private Integer numeroDeHabitaciones;
+//    @Column(name = "numero_de_habitaciones")
+//    private Integer numeroDeHabitaciones;
 
     @Column(name = "duracion")
     private Integer duracion;
