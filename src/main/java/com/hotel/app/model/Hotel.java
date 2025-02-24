@@ -12,25 +12,21 @@ import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
-
 @Getter
 @Setter
 @Entity
-public class Usuario {
+public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String correo;
-    private String nombreUsuario;
-    private String contraseña;
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
+    private String codigo;
+    private int cantidadHabitaciones;
 
-    @OneToMany(mappedBy = "administrador")
-    private List<Hotel> hoteles;
-}
+    @ManyToOne
+    @JoinColumn(name = "administrador_id")
+    private Usuario administrador;
 
-enum TipoUsuario {
-    HUESPED, ADMINISTRADOR
+    @OneToMany(mappedBy = "hotel")
+    private List<Habitacion> habitaciones;
 }
