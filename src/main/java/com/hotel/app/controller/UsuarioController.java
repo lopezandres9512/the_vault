@@ -18,7 +18,7 @@ public class UsuarioController {
     public List<Usuario> obtenerTodos() {
         return usuarioService.obtenerTodos();
     }
-
+    //handler
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obtenerPorId(@PathVariable Long id) {
         return usuarioService.obtenerPorId(id)
