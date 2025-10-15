@@ -47,4 +47,3 @@ CREATE TABLE recuperacion_datos (
     FOREIGN KEY (reservacion_id) REFERENCES reservacion(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
-

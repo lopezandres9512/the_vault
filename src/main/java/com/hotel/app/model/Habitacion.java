@@ -22,7 +22,7 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String codigo;
-    private String tamaño;
+    private String tamanio;
     private int cantidadPersonas;
     @Enumerated(EnumType.STRING)
     private EstadoHabitacion estado;
@@ -30,8 +30,7 @@ public class Habitacion {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-}
-
-enum EstadoHabitacion {
-    DISPONIBLE, OCUPADO
+    public enum EstadoHabitacion {
+        DISPONIBLE, OCUPADO
+    }
 }

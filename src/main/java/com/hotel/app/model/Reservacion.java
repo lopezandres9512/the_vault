@@ -1,11 +1,6 @@
 package com.hotel.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +13,6 @@ public class Reservacion {
     private Long id;
     private String codigo;
     private String fechaReservacion;
-
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

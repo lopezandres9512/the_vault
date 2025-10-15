@@ -1,39 +1,39 @@
 package com.hotel.app.controller;
 
 import com.hotel.app.model.*;
+import com.hotel.app.repository.HabitacionRepository;
 import com.hotel.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 @RestController
 @RequestMapping("/habitaciones")
 public class HabitacionController {
     @Autowired
-    private HabitacionService habitacionService;
+    private HabitacionRepository habitacionRepository;
 
     @GetMapping
     public List<Habitacion> obtenerTodos() {
-        return habitacionService.obtenerTodos();
+        return habitacionRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Habitacion> obtenerPorId(@PathVariable Long id) {
-        return habitacionService.obtenerPorId(id)
+        return habitacionRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Habitacion crearHabitacion(@RequestBody Habitacion habitacion) {
-        return habitacionService.guardar(habitacion);
+        return habitacionRepository.save(habitacion);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarHabitacion(@PathVariable Long id) {
-        habitacionService.eliminar(id);
+        habitacionRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
