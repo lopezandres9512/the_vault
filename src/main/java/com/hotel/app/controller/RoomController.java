@@ -2,20 +2,19 @@ package com.hotel.app.controller;
 
 import com.hotel.app.model.*;
 import com.hotel.app.repository.HabitacionRepository;
-import com.hotel.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/habitaciones")
-public class HabitacionController {
+@RequestMapping("/rooms")
+public class RoomController {
     @Autowired
     private HabitacionRepository habitacionRepository;
 
     @GetMapping
-    public List<Habitacion> obtenerTodos() {
+    public List<Habitacion> obnerTodos() {
         return habitacionRepository.findAll();
     }
 
