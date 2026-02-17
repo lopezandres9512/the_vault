@@ -2,7 +2,7 @@ spring:
   application:
     name: hotel-app
   datasource:
-    url: jdbc:mysql://localhost:3306/hotel_db
+    url: jdbc:mysql://localhost:3399/hotel_db
     username: hotel_user
     password: secret
     driver-class-name: com.mysql.cj.jdbc.Driver
