@@ -1,13 +1,13 @@
 services:
   mysql:
-    image: 'mysql:8'
+    image: 'mysql:8.3.0'
     environment:
       - 'MYSQL_DATABASE=HotelDB'
       - 'MYSQL_PASSWORD=secret'
       - 'MYSQL_ROOT_PASSWORD=verysecret'
       - 'MYSQL_USER=hotel_user'
     ports:
-      - '3306:3306'
+      - '3399:3399'
     volumes:
       - db_data:/var/lib/mysql
 
