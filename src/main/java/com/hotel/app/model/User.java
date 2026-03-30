@@ -7,8 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
@@ -16,21 +14,21 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Usuario {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String correo;
-    private String nombreUsuario;
-    private String contraseña;
+    private String name;
+    private String email;
+    private String nameUser;
+    private String password;
     @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
+    private UserType userType;
 
-    @OneToMany(mappedBy = "administrador")
-    private List<Hotel> hoteles;
+    @OneToMany(mappedBy = "administrator")
+    private List<Hotel> hotels;
 }
 
-enum TipoUsuario {
-    HUESPED, ADMINISTRADOR
+enum UserType {
+    GUEST, ADMINISTRATOR
 }

@@ -24,9 +24,9 @@ public class RecuperacionDatos {
 
     @ManyToOne
     @JoinColumn(name = "reservacion_id")
-    private Reservacion reservacion;
+    private Reservation reservacion;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    private User user;
 }

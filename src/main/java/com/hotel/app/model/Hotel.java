@@ -25,7 +25,7 @@ public class Hotel {
 
     @ManyToOne
     @JoinColumn(name = "administrator_id")
-    private Usuario administrator;
+    private User administrator;
 
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms;
