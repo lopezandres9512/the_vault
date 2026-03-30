@@ -1,7 +1,10 @@
 package com.hotel.app.controller.api.v1;
 
-import com.hotel.app.model.User;
+import com.hotel.app.dto.request.CreateUserDTO;
+import com.hotel.app.dto.request.UpdateUserDTO;
+import com.hotel.app.dto.response.UserResponseDTO;
 import com.hotel.app.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,35 +15,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
 public class UserApiController {
 
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
         return userService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User created = userService.save(user);
-        URI location = URI.create("/api/v1/users/" + created.getId());
+    public ResponseEntity<UserResponseDTO> createUser(
+            @Valid @RequestBody CreateUserDTO dto) {
+        UserResponseDTO created = userService.create(dto);
+        URI location = URI.create("/api/v1/users/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(
+    public ResponseEntity<UserResponseDTO> updateUser(
             @PathVariable Long id,
-            @RequestBody User user) {
-        return userService.update(id, user)
+            @Valid @RequestBody UpdateUserDTO dto) {
+        return userService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

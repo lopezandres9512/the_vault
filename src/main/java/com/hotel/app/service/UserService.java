@@ -1,9 +1,7 @@
 package com.hotel.app.service;
 
 import com.hotel.app.dto.request.CreateUserDTO;
-import com.hotel.app.dto.request.LoginRequestDTO;
 import com.hotel.app.dto.request.UpdateUserDTO;
-import com.hotel.app.dto.response.AuthResponseDTO;
 import com.hotel.app.dto.response.UserResponseDTO;
 import com.hotel.app.model.User;
 import com.hotel.app.repository.UserRepository;
@@ -13,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,12 +19,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // ✅ CORREGIDO: Convierte List<User> → List<UserResponseDTO>
     public List<UserResponseDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(this::toResponseDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
+    // ✅ CORREGIDO: Convierte Optional<User> → Optional<UserResponseDTO>
     public Optional<UserResponseDTO> findById(Long id) {
         return userRepository.findById(id)
                 .map(this::toResponseDTO);
@@ -37,7 +38,7 @@ public class UserService {
         user.setName(dto.name());
         user.setEmail(dto.email());
         user.setUsername(dto.username());
-        user.setPassword(dto.password()); // ⚠️ En producción, encriptar con BCrypt
+        user.setPassword(dto.password()); // ⚠️ Encriptar en producción
         user.setUserType(dto.userType());
 
         User saved = userRepository.save(user);
@@ -58,7 +59,7 @@ public class UserService {
                         existing.setUsername(dto.username());
                     }
                     if (dto.password() != null) {
-                        existing.setPassword(dto.password()); // ⚠️ Encriptar en producción
+                        existing.setPassword(dto.password());
                     }
                     if (dto.userType() != null) {
                         existing.setUserType(dto.userType());
@@ -72,27 +73,9 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public AuthResponseDTO login(LoginRequestDTO dto) {
-        return userRepository.findByEmail(dto.email())
-                .filter(user -> user.getPassword().equals(dto.password())) // ⚠️ Usar BCrypt en producción
-                .map(user -> new AuthResponseDTO(
-                        user.getId(),
-                        user.getUsername(),
-                        user.getEmail(),
-                        user.getUserType().name(),
-                        "Login successful",
-                        true
-                ))
-                .orElse(new AuthResponseDTO(
-                        null,
-                        null,
-                        null,
-                        null,
-                        "Invalid credentials",
-                        false
-                ));
-    }
-
+    // ===========================================
+    // MÉTODO DE MAPEO: Entity → DTO
+    // ===========================================
     private UserResponseDTO toResponseDTO(User user) {
         return new UserResponseDTO(
                 user.getId(),
@@ -101,7 +84,7 @@ public class UserService {
                 user.getUsername(),
                 user.getUserType(),
                 user.getHotels() != null ? user.getHotels().size() : 0,
-                0 // totalReservations (agregar si tienes relación directa)
+                0 // totalReservations
         );
     }
 }
