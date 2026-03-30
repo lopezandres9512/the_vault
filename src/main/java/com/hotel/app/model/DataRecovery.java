@@ -8,20 +8,19 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "reservations")
-public class Reservation {
+@Table(name = "data_recovery")
+public class DataRecovery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String code;
-    private LocalDate reservationDate;
+    private LocalDate occupationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
 }

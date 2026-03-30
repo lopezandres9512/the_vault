@@ -1,8 +1,8 @@
 package com.hotel.app.repository;
 
-import com.hotel.app.model.RecuperacionDatos;
+import com.hotel.app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecuperacionDatosRepository extends JpaRepository<RecuperacionDatos, Long> {}
+public interface UserRepository extends JpaRepository<User, Long> {}

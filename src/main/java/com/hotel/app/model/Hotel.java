@@ -1,32 +1,27 @@
 package com.hotel.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
+
 @Getter
 @Setter
 @Entity
+@Table(name = "hotels")
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String code;
-    private int roomsQuantity;
+    private Integer roomQuantity;
 
     @ManyToOne
     @JoinColumn(name = "administrator_id")
     private User administrator;
 
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms;
 }
