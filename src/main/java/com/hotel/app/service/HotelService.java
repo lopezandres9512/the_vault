@@ -20,7 +20,7 @@ public class HotelService {
         return hotelRepository.findById(id);
     }
 
-    public Hotel guardar(Hotel hotel) {
+    public Hotel save(Hotel hotel) {
         return hotelRepository.save(hotel);
     }
 

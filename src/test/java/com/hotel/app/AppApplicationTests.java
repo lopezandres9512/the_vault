@@ -1,7 +1,6 @@
 package com.hotel.app;
 
 import com.hotel.app.model.Habitacion;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -73,7 +72,7 @@ class AppApplicationTests {
         habitacion.setCodigo("101");
         habitacion.setTamanio("??");
         habitacion.setCantidadPersonas(3);
-        habitacion.setEstado(Habitacion.EstadoHabitacion.DISPONIBLE);
+        habitacion.setState(Room.RoomState.DISPONIBLE);
         var habitacionRequest = new HttpEntity<>(habitacion);
         ResponseEntity<Habitacion> habitacionResponseEntity = testRestTemplate.postForEntity("http://localhost:" + port + "/habitaciones", habitacionRequest, Habitacion.class);
         assertThat(habitacionResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);

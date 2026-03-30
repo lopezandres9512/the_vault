@@ -6,31 +6,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
 
 
 @Getter
 @Setter
 @Entity
-public class Habitacion {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String codigo;
-    private String tamanio;
-    private int cantidadPersonas;
+    private String code;
+    private String size;
+    private int personQuantity;
     @Enumerated(EnumType.STRING)
-    private EstadoHabitacion estado;
+    private RoomState state;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-    public enum EstadoHabitacion {
+    public enum RoomState {
         DISPONIBLE, OCUPADO
     }
 }

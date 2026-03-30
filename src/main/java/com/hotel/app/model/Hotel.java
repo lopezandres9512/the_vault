@@ -19,14 +19,14 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String codigo;
-    private int cantidadHabitaciones;
+    private String name;
+    private String code;
+    private int roomsQuantity;
 
     @ManyToOne
-    @JoinColumn(name = "administrador_id")
-    private Usuario administrador;
+    @JoinColumn(name = "administrator_id")
+    private Usuario administrator;
 
     @OneToMany(mappedBy = "hotel")
-    private List<Habitacion> habitaciones;
+    private List<Room> rooms;
 }

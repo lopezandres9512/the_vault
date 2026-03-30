@@ -14,19 +14,19 @@ public class RoomController {
     private HabitacionRepository habitacionRepository;
 
     @GetMapping
-    public List<Habitacion> obnerTodos() {
-        return habitacionRepository.findAll();
+    public List<Habitacion> getAll() {
+        return roomRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Habitacion> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<Room> getById(@PathVariable Long id) {
         return habitacionRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Habitacion crearHabitacion(@RequestBody Habitacion habitacion) {
+    public Room createRoom(@RequestBody Room room) {
         return habitacionRepository.save(habitacion);
     }
 

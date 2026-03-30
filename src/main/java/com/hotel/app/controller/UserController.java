@@ -1,22 +1,21 @@
 package com.hotel.app.controller;
 
 import com.hotel.app.model.*;
-import com.hotel.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UserController {
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService usuarioService;
 
     @GetMapping
-    public List<Usuario> obtenerTodos() {
-        return usuarioService.obtenerTodos();
+    public List<User> getAll() {
+        return userService.getAll();
     }
     //handler
     @GetMapping("/{id}")
@@ -27,13 +26,13 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.guardar(usuario);
+    public Usuario createUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminar(id);
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
+        userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
