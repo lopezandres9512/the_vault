@@ -1,6 +1,6 @@
 package com.hotel.app.controller.api.v1;
 
-// ✅ SOLO DTOs - NO importar entidades
+
 import com.hotel.app.dto.request.CreateReservationDTO;
 import com.hotel.app.dto.request.UpdateReservationDTO;
 import com.hotel.app.dto.response.ReservationResponseDTO;
@@ -36,8 +36,8 @@ public class ReservationApiController {
 
     @PostMapping
     public ResponseEntity<ReservationResponseDTO> createReservation(
-            @Valid @RequestBody CreateReservationDTO dto) {  // ✅ DTO de entrada
-        ReservationResponseDTO created = reservationService.create(dto);  // ✅ DTO de salida
+            @Valid @RequestBody CreateReservationDTO dto) {
+        ReservationResponseDTO created = reservationService.create(dto);
         URI location = URI.create("/api/v1/reservations/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
@@ -45,8 +45,8 @@ public class ReservationApiController {
     @PutMapping("/{id}")
     public ResponseEntity<ReservationResponseDTO> updateReservation(
             @PathVariable Long id,
-            @Valid @RequestBody UpdateReservationDTO dto) {  // ✅ DTO de entrada
-        return reservationService.update(id, dto)  // ✅ Retorna Optional<DTO>
+            @Valid @RequestBody UpdateReservationDTO dto) {
+        return reservationService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

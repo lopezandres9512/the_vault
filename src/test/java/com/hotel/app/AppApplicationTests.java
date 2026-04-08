@@ -1,6 +1,6 @@
 package com.hotel.app;
 
-// ✅ IMPORTS CORREGIDOS: Todos en inglés, consistentes con el modelo
+
 import com.hotel.app.model.Room;
 import com.hotel.app.model.Hotel;
 import com.hotel.app.model.Reservation;
@@ -33,12 +33,12 @@ class AppApplicationTests {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    // ✅ TestContainer para MySQL (se mantiene)
+
     static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0");
 
     @Test
     void contextLoads() {
-        // Verifica que el contexto de Spring se inicializa correctamente
+
     }
 
     @BeforeAll
@@ -58,7 +58,7 @@ class AppApplicationTests {
         registry.add("spring.datasource.password", mysql::getPassword);
     }
 
-    // ✅ TEST CORREGIDO: GET /api/v1/rooms retorna lista vacía
+
     @Test
     void testRoomsReturnsEmptyList() {
         ResponseEntity<Room[]> response = testRestTemplate.getForEntity(
@@ -70,7 +70,7 @@ class AppApplicationTests {
         assertThat(body).isEmpty();
     }
 
-    // ✅ TEST CORREGIDO: CRUD completo de Rooms con nombres en inglés
+
     @Test
     void createAndDeleteRoom() {
         // 1. GET - verificar lista vacía
@@ -95,7 +95,7 @@ class AppApplicationTests {
                 Room.class
         );
 
-        // ✅ CREATE debe retornar 201 Created (no 200 OK)
+
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         Room createdRoom = createResponse.getBody();
@@ -106,7 +106,7 @@ class AppApplicationTests {
         assertThat(createdRoom.getSize()).isEqualTo("Double");
         assertThat(createdRoom.getState()).isEqualTo(Room.RoomState.AVAILABLE);
 
-        // 3. GET by ID - verificar que se creó
+
         ResponseEntity<Room> getByidResponse = testRestTemplate.getForEntity(
                 "http://localhost:" + port + "/api/v1/rooms/{id}",
                 Room.class,
@@ -118,13 +118,13 @@ class AppApplicationTests {
         assertThat(fetchedRoom.getId()).isEqualTo(createdRoom.getId());
         assertThat(fetchedRoom.getCode()).isEqualTo("101");
 
-        // 4. DELETE - eliminar habitación
+
         testRestTemplate.delete(
                 "http://localhost:" + port + "/api/v1/rooms/{id}",
                 createdRoom.getId()
         );
 
-        // 5. GET by ID - verificar que fue eliminado (404 Not Found)
+
         ResponseEntity<Room> afterDeleteResponse = testRestTemplate.getForEntity(
                 "http://localhost:" + port + "/api/v1/rooms/{id}",
                 Room.class,
