@@ -1,6 +1,6 @@
 package com.hotel.app.controller.api.v1;
 
-// ✅ SOLO DTOs - NO importar entidades
+
 import com.hotel.app.dto.request.CreateRoomDTO;
 import com.hotel.app.dto.request.UpdateRoomDTO;
 import com.hotel.app.dto.response.RoomResponseDTO;
