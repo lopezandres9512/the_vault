@@ -2,6 +2,8 @@ package com.hotel.app.controller.api.v1;
 
 import com.hotel.app.dto.request.CreateUserDTO;
 import com.hotel.app.dto.request.UpdateUserDTO;
+import com.hotel.app.dto.request.LoginRequestDTO;
+import com.hotel.app.dto.response.AuthResponseDTO;
 import com.hotel.app.dto.response.UserResponseDTO;
 import com.hotel.app.service.UserService;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
 public class UserApiController {
 
     private final UserService userService;
@@ -31,12 +34,18 @@ public class UserApiController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(
+    @PostMapping("/register")
+    public ResponseEntity<UserResponseDTO> registerUser(
             @Valid @RequestBody CreateUserDTO dto) {
         UserResponseDTO created = userService.create(dto);
         URI location = URI.create("/api/v1/users/" + created.id());
         return ResponseEntity.created(location).body(created);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseDTO> login(
+            @Valid @RequestBody LoginRequestDTO dto) {
+        return ResponseEntity.ok(userService.login(dto));
     }
 
     @PutMapping("/{id}")

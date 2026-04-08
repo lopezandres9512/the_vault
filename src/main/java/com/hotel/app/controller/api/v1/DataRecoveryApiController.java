@@ -1,7 +1,10 @@
 package com.hotel.app.controller.api.v1;
 
-import com.hotel.app.model.DataRecovery;
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateDataRecoveryDTO;
+import com.hotel.app.dto.response.DataRecoveryResponseDTO;
 import com.hotel.app.service.DataRecoveryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +21,23 @@ public class DataRecoveryApiController {
     private final DataRecoveryService dataRecoveryService;
 
     @GetMapping
-    public ResponseEntity<List<DataRecovery>> getAllRecoveryData() {
-        return ResponseEntity.ok(dataRecoveryService.findAll());
+    public ResponseEntity<List<DataRecoveryResponseDTO>> getAllRecoveryData() {
+        List<DataRecoveryResponseDTO> data = dataRecoveryService.findAll();
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DataRecovery> getRecoveryDataById(@PathVariable Long id) {
+    public ResponseEntity<DataRecoveryResponseDTO> getRecoveryDataById(@PathVariable Long id) {
         return dataRecoveryService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<DataRecovery> createRecoveryData(@RequestBody DataRecovery dataRecovery) {
-        DataRecovery created = dataRecoveryService.save(dataRecovery);
-        URI location = URI.create("/api/v1/data-recovery/" + created.getId());
+    public ResponseEntity<DataRecoveryResponseDTO> createRecoveryData(
+            @Valid @RequestBody CreateDataRecoveryDTO dto) {
+        DataRecoveryResponseDTO created = dataRecoveryService.create(dto);
+        URI location = URI.create("/api/v1/data-recovery/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
 

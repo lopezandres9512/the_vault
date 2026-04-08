@@ -1,7 +1,11 @@
 package com.hotel.app.controller.api.v1;
 
-import com.hotel.app.model.Reservation;
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateReservationDTO;
+import com.hotel.app.dto.request.UpdateReservationDTO;
+import com.hotel.app.dto.response.ReservationResponseDTO;
 import com.hotel.app.service.ReservationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,29 +22,31 @@ public class ReservationApiController {
     private final ReservationService reservationService;
 
     @GetMapping
-    public ResponseEntity<List<Reservation>> getAllReservations() {
-        return ResponseEntity.ok(reservationService.findAll());
+    public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
+        List<ReservationResponseDTO> data = reservationService.findAll();
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+    public ResponseEntity<ReservationResponseDTO> getReservationById(@PathVariable Long id) {
         return reservationService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-        Reservation created = reservationService.save(reservation);
-        URI location = URI.create("/api/v1/reservations/" + created.getId());
+    public ResponseEntity<ReservationResponseDTO> createReservation(
+            @Valid @RequestBody CreateReservationDTO dto) {  // ✅ DTO de entrada
+        ReservationResponseDTO created = reservationService.create(dto);  // ✅ DTO de salida
+        URI location = URI.create("/api/v1/reservations/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(
+    public ResponseEntity<ReservationResponseDTO> updateReservation(
             @PathVariable Long id,
-            @RequestBody Reservation reservation) {
-        return reservationService.update(id, reservation)
+            @Valid @RequestBody UpdateReservationDTO dto) {  // ✅ DTO de entrada
+        return reservationService.update(id, dto)  // ✅ Retorna Optional<DTO>
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

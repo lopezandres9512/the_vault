@@ -9,12 +9,15 @@ import com.hotel.app.model.User;
 import com.hotel.app.repository.ReservationRepository;
 import com.hotel.app.repository.RoomRepository;
 import com.hotel.app.repository.UserRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +30,7 @@ public class ReservationService {
     public List<ReservationResponseDTO> findAll() {
         return reservationRepository.findAll().stream()
                 .map(this::toResponseDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public Optional<ReservationResponseDTO> findById(Long id) {
@@ -37,15 +40,27 @@ public class ReservationService {
 
     @Transactional
     public ReservationResponseDTO create(CreateReservationDTO dto) {
+        if (reservationRepository.existsByCode(dto.code())) {
+            throw new RuntimeException("Reservation code already exists: " + dto.code());
+        }
+
+        User user = userRepository.findById(dto.userId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", dto.userId()));
+        Room room = roomRepository.findById(dto.roomId())
+                .orElseThrow(() -> new ResourceNotFoundException("Room", dto.roomId()));
+
+        if (room.getState() != Room.RoomState.AVAILABLE) {
+            throw new RuntimeException("Room is not available");
+        }
+
         Reservation reservation = new Reservation();
         reservation.setCode(dto.code());
         reservation.setReservationDate(dto.reservationDate());
+        reservation.setUser(user);
+        reservation.setRoom(room);
 
-        userRepository.findById(dto.userId())
-                .ifPresent(reservation::setUser);
-
-        roomRepository.findById(dto.roomId())
-                .ifPresent(reservation::setRoom);
+        room.setState(Room.RoomState.OCCUPIED);
+        roomRepository.save(room);
 
         Reservation saved = reservationRepository.save(reservation);
         return toResponseDTO(saved);
@@ -55,19 +70,17 @@ public class ReservationService {
     public Optional<ReservationResponseDTO> update(Long id, UpdateReservationDTO dto) {
         return reservationRepository.findById(id)
                 .map(existing -> {
-                    if (dto.code() != null) {
-                        existing.setCode(dto.code());
-                    }
-                    if (dto.reservationDate() != null) {
-                        existing.setReservationDate(dto.reservationDate());
-                    }
+                    if (dto.code() != null) existing.setCode(dto.code());
+                    if (dto.reservationDate() != null) existing.setReservationDate(dto.reservationDate());
                     if (dto.userId() != null) {
-                        userRepository.findById(dto.userId())
-                                .ifPresent(existing::setUser);
+                        User user = userRepository.findById(dto.userId())
+                                .orElseThrow(() -> new ResourceNotFoundException("User", dto.userId()));
+                        existing.setUser(user);
                     }
                     if (dto.roomId() != null) {
-                        roomRepository.findById(dto.roomId())
-                                .ifPresent(existing::setRoom);
+                        Room room = roomRepository.findById(dto.roomId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Room", dto.roomId()));
+                        existing.setRoom(room);
                     }
                     return toResponseDTO(reservationRepository.save(existing));
                 });
@@ -88,8 +101,7 @@ public class ReservationService {
                 reservation.getRoom() != null ? reservation.getRoom().getId() : null,
                 reservation.getRoom() != null ? reservation.getRoom().getCode() : null,
                 reservation.getRoom() != null && reservation.getRoom().getHotel() != null
-                        ? reservation.getRoom().getHotel().getName()
-                        : null
+                        ? reservation.getRoom().getHotel().getName() : null
         );
     }
 }

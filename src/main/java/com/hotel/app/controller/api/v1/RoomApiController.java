@@ -1,7 +1,11 @@
 package com.hotel.app.controller.api.v1;
 
-import com.hotel.app.model.Room;
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateRoomDTO;
+import com.hotel.app.dto.request.UpdateRoomDTO;
+import com.hotel.app.dto.response.RoomResponseDTO;
 import com.hotel.app.service.RoomService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,34 +22,37 @@ public class RoomApiController {
     private final RoomService roomService;
 
     @GetMapping
-    public ResponseEntity<List<Room>> getAllRooms() {
-        return ResponseEntity.ok(roomService.findAll());
+    public ResponseEntity<List<RoomResponseDTO>> getAllRooms() {
+        List<RoomResponseDTO> data = roomService.findAll();
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Room> getRoomById(@PathVariable Long id) {
+    public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable Long id) {
         return roomService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/hotel/{hotelId}")
-    public ResponseEntity<List<Room>> getRoomsByHotel(@PathVariable Long hotelId) {
-        return ResponseEntity.ok(roomService.findByHotelId(hotelId));
+    public ResponseEntity<List<RoomResponseDTO>> getRoomsByHotel(@PathVariable Long hotelId) {
+        List<RoomResponseDTO> data = roomService.findByHotelId(hotelId);
+        return ResponseEntity.ok(data);
     }
 
     @PostMapping
-    public ResponseEntity<Room> createRoom(@RequestBody Room room) {
-        Room created = roomService.save(room);
-        URI location = URI.create("/api/v1/rooms/" + created.getId());
+    public ResponseEntity<RoomResponseDTO> createRoom(
+            @Valid @RequestBody CreateRoomDTO dto) {
+        RoomResponseDTO created = roomService.create(dto);
+        URI location = URI.create("/api/v1/rooms/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Room> updateRoom(
+    public ResponseEntity<RoomResponseDTO> updateRoom(
             @PathVariable Long id,
-            @RequestBody Room room) {
-        return roomService.update(id, room)
+            @Valid @RequestBody UpdateRoomDTO dto) {
+        return roomService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
