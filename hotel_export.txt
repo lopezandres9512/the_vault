@@ -1,0 +1,1923 @@
+🏨 HOTEL APP EXPORT - Mon Apr  6 05:39:26 PM -05 2026
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: pom.xml
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/main/java</sourceDir>
+                                <sourceDir>target/generated-sources/annotations</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/test/java</sourceDir>
+                                <sourceDir>target/generated-test-sources/test-annotations</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.2</version>
+		<relativePath/>
+	</parent>
+	<groupId>com.hotel</groupId>
+	<artifactId>app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>app</name>
+	<description>Spring Boot hotel application</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	<kotlin.version>2.3.10</kotlin.version>
+    </properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.3.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>6.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-docker-compose</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>8.3.0</version>
+		</dependency>
+
+
+
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+	</dependencies>
+
+</project>
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: compose.yaml
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+services:
+  mysql:
+    image: 'mysql:8.3.0'
+    environment:
+      - 'MYSQL_DATABASE=HotelDB'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=hotel_user'
+    ports:
+      - '3399:3399'
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "60000:8080"
+#  node:
+#    image: node:20.16
+#    restart: always
+#    working_dir: /app
+#    volumes:
+#      - ./:/app
+#    ports:
+#      - "3000:3000"
+#    command: "npm start"
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/AppApplication.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AppApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AppApplication.class, args);
+	}
+}
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/config/PasswordEncoderConfig.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+public class PasswordEncoderConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/controller/api/v1/DataRecoveryApiController.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.controller.api.v1;
+
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateDataRecoveryDTO;
+import com.hotel.app.dto.response.DataRecoveryResponseDTO;
+import com.hotel.app.service.DataRecoveryService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/data-recovery")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
+public class DataRecoveryApiController {
+
+    private final DataRecoveryService dataRecoveryService;
+
+    @GetMapping
+    public ResponseEntity<List<DataRecoveryResponseDTO>> getAllRecoveryData() {
+        List<DataRecoveryResponseDTO> data = dataRecoveryService.findAll();
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DataRecoveryResponseDTO> getRecoveryDataById(@PathVariable Long id) {
+        return dataRecoveryService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<DataRecoveryResponseDTO> createRecoveryData(
+            @Valid @RequestBody CreateDataRecoveryDTO dto) {
+        DataRecoveryResponseDTO created = dataRecoveryService.create(dto);
+        URI location = URI.create("/api/v1/data-recovery/" + created.id());
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRecoveryData(@PathVariable Long id) {
+        dataRecoveryService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/controller/api/v1/HotelApiController.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.controller.api.v1;
+
+import com.hotel.app.dto.request.CreateHotelDTO;
+import com.hotel.app.dto.request.UpdateHotelDTO;
+import com.hotel.app.dto.response.HotelResponseDTO;
+import com.hotel.app.service.HotelService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/hotels")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
+public class HotelApiController {
+
+    private final HotelService hotelService;
+
+    @GetMapping
+    public ResponseEntity<List<HotelResponseDTO>> getAllHotels() {
+        return ResponseEntity.ok(hotelService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HotelResponseDTO> getHotelById(@PathVariable Long id) {
+        return hotelService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<HotelResponseDTO> createHotel(
+            @Valid @RequestBody CreateHotelDTO dto) {
+        HotelResponseDTO created = hotelService.create(dto);
+        URI location = URI.create("/api/v1/hotels/" + created.id());
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<HotelResponseDTO> updateHotel(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateHotelDTO dto) {
+        return hotelService.update(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteHotel(@PathVariable Long id) {
+        hotelService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/controller/api/v1/ReservationApiController.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.controller.api.v1;
+
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateReservationDTO;
+import com.hotel.app.dto.request.UpdateReservationDTO;
+import com.hotel.app.dto.response.ReservationResponseDTO;
+import com.hotel.app.service.ReservationService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/reservations")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
+public class ReservationApiController {
+
+    private final ReservationService reservationService;
+
+    @GetMapping
+    public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
+        List<ReservationResponseDTO> data = reservationService.findAll();
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservationResponseDTO> getReservationById(@PathVariable Long id) {
+        return reservationService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<ReservationResponseDTO> createReservation(
+            @Valid @RequestBody CreateReservationDTO dto) {  // ✅ DTO de entrada
+        ReservationResponseDTO created = reservationService.create(dto);  // ✅ DTO de salida
+        URI location = URI.create("/api/v1/reservations/" + created.id());
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationResponseDTO> updateReservation(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateReservationDTO dto) {  // ✅ DTO de entrada
+        return reservationService.update(id, dto)  // ✅ Retorna Optional<DTO>
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+        reservationService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/controller/api/v1/RoomApiController.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.controller.api.v1;
+
+// ✅ SOLO DTOs - NO importar entidades
+import com.hotel.app.dto.request.CreateRoomDTO;
+import com.hotel.app.dto.request.UpdateRoomDTO;
+import com.hotel.app.dto.response.RoomResponseDTO;
+import com.hotel.app.service.RoomService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/rooms")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
+public class RoomApiController {
+
+    private final RoomService roomService;
+
+    @GetMapping
+    public ResponseEntity<List<RoomResponseDTO>> getAllRooms() {
+        List<RoomResponseDTO> data = roomService.findAll();
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable Long id) {
+        return roomService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/hotel/{hotelId}")
+    public ResponseEntity<List<RoomResponseDTO>> getRoomsByHotel(@PathVariable Long hotelId) {
+        List<RoomResponseDTO> data = roomService.findByHotelId(hotelId);
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping
+    public ResponseEntity<RoomResponseDTO> createRoom(
+            @Valid @RequestBody CreateRoomDTO dto) {
+        RoomResponseDTO created = roomService.create(dto);
+        URI location = URI.create("/api/v1/rooms/" + created.id());
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RoomResponseDTO> updateRoom(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateRoomDTO dto) {
+        return roomService.update(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
+        roomService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/controller/api/v1/UserApiController.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.controller.api.v1;
+
+import com.hotel.app.dto.request.CreateUserDTO;
+import com.hotel.app.dto.request.UpdateUserDTO;
+import com.hotel.app.dto.request.LoginRequestDTO;
+import com.hotel.app.dto.response.AuthResponseDTO;
+import com.hotel.app.dto.response.UserResponseDTO;
+import com.hotel.app.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4321"})
+public class UserApiController {
+
+    private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
+        return userService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserResponseDTO> registerUser(
+            @Valid @RequestBody CreateUserDTO dto) {
+        UserResponseDTO created = userService.create(dto);
+        URI location = URI.create("/api/v1/users/" + created.id());
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseDTO> login(
+            @Valid @RequestBody LoginRequestDTO dto) {
+        return ResponseEntity.ok(userService.login(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserDTO dto) {
+        return userService.update(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/CreateDataRecoveryDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+public record CreateDataRecoveryDTO(
+        @NotNull(message = "Occupation date is required")
+        LocalDate occupationDate,
+
+        @NotNull(message = "Reservation ID is required")
+        Long reservationId,
+
+        @NotNull(message = "User ID is required")
+        Long userId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/CreateHotelDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+public record CreateHotelDTO(
+        @NotBlank String name,
+        @NotBlank String code,
+        @Positive Integer roomQuantity,
+        Long administratorId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/CreateReservationDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+public record CreateReservationDTO(
+        @NotBlank(message = "Reservation code is required")
+        String code,
+
+        @NotNull(message = "Reservation date is required")
+        @FutureOrPresent(message = "Reservation date must be today or in the future")
+        LocalDate reservationDate,
+
+        @NotNull(message = "User ID is required")
+        Long userId,
+
+        @NotNull(message = "Room ID is required")
+        Long roomId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/CreateRoomDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import com.hotel.app.model.Room.RoomState;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
+
+public record CreateRoomDTO(
+        @NotBlank(message = "Room code is required")
+        String code,
+
+        @NotBlank(message = "Room size is required")
+        String size,
+
+        @Positive(message = "Person quantity must be positive")
+        Integer personQuantity,
+
+        @NotNull(message = "Room state is required")
+        RoomState state,
+
+        @NotNull(message = "Hotel ID is required")
+        Long hotelId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/CreateUserDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import com.hotel.app.model.User.UserType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record CreateUserDTO(
+        @NotBlank(message = "Name is required")
+        String name,
+
+        @NotBlank(message = "Email is required")
+        @Email(message = "Email must be valid")
+        String email,
+
+        @NotBlank(message = "Username is required")
+        @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+        String username,
+
+        @NotBlank(message = "Password is required")
+        @Size(min = 6, message = "Password must be at least 6 characters")
+        String password,
+
+        @NotNull(message = "User type is required")
+        UserType userType
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/LoginRequestDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record LoginRequestDTO(
+        @NotBlank(message = "Email is required")
+        @Email(message = "Email must be valid")
+        String email,
+
+        @NotBlank(message = "Password is required")
+        String password
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/UpdateHotelDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+public record UpdateHotelDTO(
+        @NotBlank(message = "Hotel name is required")
+        String name,
+
+        @NotBlank(message = "Hotel code is required")
+        String code,
+
+        @Positive(message = "Room quantity must be positive")
+        Integer roomQuantity,
+
+        Long administratorId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/UpdateReservationDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+public record UpdateReservationDTO(
+        String code,
+
+        @FutureOrPresent(message = "Reservation date must be today or in the future")
+        LocalDate reservationDate,
+
+        Long userId,
+
+        Long roomId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/UpdateRoomDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import com.hotel.app.model.Room.RoomState;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+public record UpdateRoomDTO(
+        @NotBlank(message = "Room code is required")
+        String code,
+
+        @NotBlank(message = "Room size is required")
+        String size,
+
+        @Positive(message = "Person quantity must be positive")
+        Integer personQuantity,
+
+        RoomState state,
+
+        Long hotelId
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/request/UpdateUserDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.request;
+
+import com.hotel.app.model.User.UserType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+
+public record UpdateUserDTO(
+        String name,
+
+        @Email(message = "Email must be valid")
+        String email,
+
+        @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+        String username,
+
+        @Size(min = 6, message = "Password must be at least 6 characters")
+        String password,
+
+        UserType userType
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/AuthResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+public record AuthResponseDTO(
+        Long userId,
+        String username,
+        String email,
+        String userType,
+        String message,
+        boolean isAuthenticated
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/DataRecoveryResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import java.time.LocalDate;
+
+public record DataRecoveryResponseDTO(
+        Long id,
+        LocalDate occupationDate,
+        Long reservationId,
+        String reservationCode,
+        Long userId,
+        String userName
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/ErrorResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public record ErrorResponseDTO(
+        Integer status,
+        String error,
+        String message,
+        String path,
+        LocalDateTime timestamp,
+        List<String> validationErrors
+) {
+    public static ErrorResponseDTO of(Integer status, String error, String message, String path) {
+        return new ErrorResponseDTO(status, error, message, path, LocalDateTime.now(), null);
+    }
+
+    public static ErrorResponseDTO withValidation(Integer status, String error, String message, String path, List<String> validationErrors) {
+        return new ErrorResponseDTO(status, error, message, path, LocalDateTime.now(), validationErrors);
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/HotelResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import java.time.LocalDateTime;
+
+public record HotelResponseDTO(
+        Long id,
+        String name,
+        String code,
+        Integer roomQuantity,
+        Long administratorId,
+        String administratorName,
+        Integer totalRooms,
+        LocalDateTime createdAt
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/ReservationResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import java.time.LocalDate;
+
+public record ReservationResponseDTO(
+        Long id,
+        String code,
+        LocalDate reservationDate,
+        Long userId,
+        String userName,
+        Long roomId,
+        String roomCode,
+        String hotelName
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/RoomResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import com.hotel.app.model.Room.RoomState;
+
+public record RoomResponseDTO(
+        Long id,
+        String code,
+        String size,
+        Integer personQuantity,
+        RoomState state,
+        Long hotelId,
+        String hotelName
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/dto/response/UserResponseDTO.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.dto.response;
+
+import com.hotel.app.model.User.UserType;
+
+public record UserResponseDTO(
+        Long id,
+        String name,
+        String email,
+        String username,
+        UserType userType,
+        Integer totalHotels,
+        Integer totalReservations
+) {}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/exception/BusinessException.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.exception;
+
+public class BusinessException extends RuntimeException {
+
+    public BusinessException(String message) {
+        super(message);
+    }
+
+    public BusinessException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/exception/ResourceNotFoundException.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.exception;
+
+public class ResourceNotFoundException extends RuntimeException {
+
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+
+    public ResourceNotFoundException(String resource, Long id) {
+        super(String.format("%s not found with id: %d", resource, id));
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/model/DataRecovery.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "data_recovery")
+public class DataRecovery {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private LocalDate occupationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/model/Hotel.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "hotels")
+public class Hotel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String code;
+    private Integer roomQuantity;
+
+    @ManyToOne
+    @JoinColumn(name = "administrator_id")
+    private User administrator;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/model/Reservation.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "reservations")
+public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String code;
+    private LocalDate reservationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/model/Room.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "rooms")
+public class Room {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String code;
+    private String size;
+    private Integer personQuantity;
+
+    @Enumerated(EnumType.STRING)
+    private RoomState state;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+
+    public enum RoomState {
+        AVAILABLE,
+        OCCUPIED
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/model/User.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String email;
+    private String username;
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Hotel> hotels;
+
+    public enum UserType {
+        GUEST,
+        ADMINISTRATOR
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/repository/DataRecoveryRepository.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.repository;
+
+import com.hotel.app.model.DataRecovery;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface DataRecoveryRepository extends JpaRepository<DataRecovery, Long> {
+    List<DataRecovery> findByUserId(Long userId);
+    List<DataRecovery> findByReservationId(Long reservationId);
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/repository/HotelRepository.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.repository;
+
+import com.hotel.app.model.Hotel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface HotelRepository extends JpaRepository<Hotel, Long> {
+    Optional<Hotel> findByCode(String code);
+    List<Hotel> findByAdministratorId(Long administratorId);
+    boolean existsByCode(String code);
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/repository/ReservationRepository.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.repository;
+import java.util.Optional;
+
+import com.hotel.app.model.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+
+
+    boolean existsByCode(String code);
+
+
+    Optional<Reservation> findByCode(String code);
+
+
+    List<Reservation> findByUserId(Long userId);
+
+
+    List<Reservation> findByRoomId(Long roomId);
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/repository/RoomRepository.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.repository;
+import java.util.Optional;
+
+import com.hotel.app.model.Room;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface RoomRepository extends JpaRepository<Room, Long> {
+
+
+    boolean existsByCode(String code);
+
+
+    Optional<Room> findByCode(String code);
+
+
+    List<Room> findByHotelId(Long hotelId);
+
+
+    List<Room> findByHotelIdAndState(Long hotelId, Room.RoomState state);
+
+
+    @Query("SELECT r FROM Room r WHERE r.hotel.id = :hotelId AND r.state = 'AVAILABLE'")
+    List<Room> findAvailableByHotel(@Param("hotelId") Long hotelId);
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/repository/UserRepository.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.repository;
+
+import com.hotel.app.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
+    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
+}
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/service/DataRecoveryService.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.service;
+
+import com.hotel.app.dto.request.CreateDataRecoveryDTO;
+import com.hotel.app.dto.response.DataRecoveryResponseDTO;
+import com.hotel.app.model.DataRecovery;
+import com.hotel.app.model.Reservation;
+import com.hotel.app.model.User;
+import com.hotel.app.repository.DataRecoveryRepository;
+import com.hotel.app.repository.ReservationRepository;
+import com.hotel.app.repository.UserRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class DataRecoveryService {
+
+    private final DataRecoveryRepository dataRecoveryRepository;
+    private final ReservationRepository reservationRepository;
+    private final UserRepository userRepository;
+
+    // ✅ CORREGIDO: Declara y retorna List<DTO>
+    public List<DataRecoveryResponseDTO> findAll() {
+        return dataRecoveryRepository.findAll().stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<DataRecoveryResponseDTO> findById(Long id) {
+        return dataRecoveryRepository.findById(id)
+                .map(this::toResponseDTO);
+    }
+
+    @Transactional
+    public DataRecoveryResponseDTO create(CreateDataRecoveryDTO dto) {
+        Reservation reservation = reservationRepository.findById(dto.reservationId())
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation", dto.reservationId()));
+        User user = userRepository.findById(dto.userId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", dto.userId()));
+
+        DataRecovery dataRecovery = new DataRecovery();
+        dataRecovery.setOccupationDate(dto.occupationDate());
+        dataRecovery.setReservation(reservation);
+        dataRecovery.setUser(user);
+
+        DataRecovery saved = dataRecoveryRepository.save(dataRecovery);
+        return toResponseDTO(saved);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        dataRecoveryRepository.deleteById(id);
+    }
+
+    // ✅ MAPPER: Entity → DTO
+    private DataRecoveryResponseDTO toResponseDTO(DataRecovery entity) {
+        return new DataRecoveryResponseDTO(
+                entity.getId(),
+                entity.getOccupationDate(),
+                entity.getReservation() != null ? entity.getReservation().getId() : null,
+                entity.getReservation() != null ? entity.getReservation().getCode() : null,
+                entity.getUser() != null ? entity.getUser().getId() : null,
+                entity.getUser() != null ? entity.getUser().getName() : null
+        );
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/service/HotelService.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.service;
+
+import com.hotel.app.dto.request.CreateHotelDTO;
+import com.hotel.app.dto.request.UpdateHotelDTO;
+import com.hotel.app.dto.response.HotelResponseDTO;
+import com.hotel.app.model.Hotel;
+import com.hotel.app.model.User;
+import com.hotel.app.repository.HotelRepository;
+import com.hotel.app.repository.UserRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class HotelService {
+
+    private final HotelRepository hotelRepository;
+    private final UserRepository userRepository;
+
+    public List<HotelResponseDTO> findAll() {
+        return hotelRepository.findAll().stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<HotelResponseDTO> findById(Long id) {
+        return hotelRepository.findById(id)
+                .map(this::toResponseDTO);
+    }
+
+    @Transactional
+    public HotelResponseDTO create(CreateHotelDTO dto) {
+        if (hotelRepository.existsByCode(dto.code())) {
+            throw new RuntimeException("Hotel code already exists: " + dto.code());
+        }
+
+        Hotel hotel = new Hotel();
+        hotel.setName(dto.name());
+        hotel.setCode(dto.code());
+        hotel.setRoomQuantity(dto.roomQuantity());
+
+        if (dto.administratorId() != null) {
+            User admin = userRepository.findById(dto.administratorId())
+                    .orElseThrow(() -> new ResourceNotFoundException("User", dto.administratorId()));
+            hotel.setAdministrator(admin);
+        }
+
+        Hotel saved = hotelRepository.save(hotel);
+        return toResponseDTO(saved);
+    }
+
+    @Transactional
+    public Optional<HotelResponseDTO> update(Long id, UpdateHotelDTO dto) {
+        return hotelRepository.findById(id)
+                .map(existing -> {
+                    if (dto.name() != null) existing.setName(dto.name());
+                    if (dto.code() != null) existing.setCode(dto.code());
+                    if (dto.roomQuantity() != null) existing.setRoomQuantity(dto.roomQuantity());
+                    if (dto.administratorId() != null) {
+                        User admin = userRepository.findById(dto.administratorId())
+                                .orElseThrow(() -> new ResourceNotFoundException("User", dto.administratorId()));
+                        existing.setAdministrator(admin);
+                    }
+                    return toResponseDTO(hotelRepository.save(existing));
+                });
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        hotelRepository.deleteById(id);
+    }
+
+    private HotelResponseDTO toResponseDTO(Hotel hotel) {
+        return new HotelResponseDTO(
+                hotel.getId(),
+                hotel.getName(),
+                hotel.getCode(),
+                hotel.getRoomQuantity(),
+                hotel.getAdministrator() != null ? hotel.getAdministrator().getId() : null,
+                hotel.getAdministrator() != null ? hotel.getAdministrator().getName() : null,
+                hotel.getRooms() != null ? hotel.getRooms().size() : 0,
+                null
+        );
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/service/ReservationService.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.service;
+
+import com.hotel.app.dto.request.CreateReservationDTO;
+import com.hotel.app.dto.request.UpdateReservationDTO;
+import com.hotel.app.dto.response.ReservationResponseDTO;
+import com.hotel.app.model.Reservation;
+import com.hotel.app.model.Room;
+import com.hotel.app.model.User;
+import com.hotel.app.repository.ReservationRepository;
+import com.hotel.app.repository.RoomRepository;
+import com.hotel.app.repository.UserRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class ReservationService {
+
+    private final ReservationRepository reservationRepository;
+    private final UserRepository userRepository;
+    private final RoomRepository roomRepository;
+
+    public List<ReservationResponseDTO> findAll() {
+        return reservationRepository.findAll().stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<ReservationResponseDTO> findById(Long id) {
+        return reservationRepository.findById(id)
+                .map(this::toResponseDTO);
+    }
+
+    @Transactional
+    public ReservationResponseDTO create(CreateReservationDTO dto) {
+        if (reservationRepository.existsByCode(dto.code())) {
+            throw new RuntimeException("Reservation code already exists: " + dto.code());
+        }
+
+        User user = userRepository.findById(dto.userId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", dto.userId()));
+        Room room = roomRepository.findById(dto.roomId())
+                .orElseThrow(() -> new ResourceNotFoundException("Room", dto.roomId()));
+
+        if (room.getState() != Room.RoomState.AVAILABLE) {
+            throw new RuntimeException("Room is not available");
+        }
+
+        Reservation reservation = new Reservation();
+        reservation.setCode(dto.code());
+        reservation.setReservationDate(dto.reservationDate());
+        reservation.setUser(user);
+        reservation.setRoom(room);
+
+        room.setState(Room.RoomState.OCCUPIED);
+        roomRepository.save(room);
+
+        Reservation saved = reservationRepository.save(reservation);
+        return toResponseDTO(saved);
+    }
+
+    @Transactional
+    public Optional<ReservationResponseDTO> update(Long id, UpdateReservationDTO dto) {
+        return reservationRepository.findById(id)
+                .map(existing -> {
+                    if (dto.code() != null) existing.setCode(dto.code());
+                    if (dto.reservationDate() != null) existing.setReservationDate(dto.reservationDate());
+                    if (dto.userId() != null) {
+                        User user = userRepository.findById(dto.userId())
+                                .orElseThrow(() -> new ResourceNotFoundException("User", dto.userId()));
+                        existing.setUser(user);
+                    }
+                    if (dto.roomId() != null) {
+                        Room room = roomRepository.findById(dto.roomId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Room", dto.roomId()));
+                        existing.setRoom(room);
+                    }
+                    return toResponseDTO(reservationRepository.save(existing));
+                });
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        reservationRepository.deleteById(id);
+    }
+
+    private ReservationResponseDTO toResponseDTO(Reservation reservation) {
+        return new ReservationResponseDTO(
+                reservation.getId(),
+                reservation.getCode(),
+                reservation.getReservationDate(),
+                reservation.getUser() != null ? reservation.getUser().getId() : null,
+                reservation.getUser() != null ? reservation.getUser().getName() : null,
+                reservation.getRoom() != null ? reservation.getRoom().getId() : null,
+                reservation.getRoom() != null ? reservation.getRoom().getCode() : null,
+                reservation.getRoom() != null && reservation.getRoom().getHotel() != null
+                        ? reservation.getRoom().getHotel().getName() : null
+        );
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/service/RoomService.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.service;
+
+import com.hotel.app.dto.request.CreateRoomDTO;
+import com.hotel.app.dto.request.UpdateRoomDTO;
+import com.hotel.app.dto.response.RoomResponseDTO;
+import com.hotel.app.model.Hotel;
+import com.hotel.app.model.Room;
+import com.hotel.app.repository.HotelRepository;
+import com.hotel.app.repository.RoomRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class RoomService {
+
+    private final RoomRepository roomRepository;
+    private final HotelRepository hotelRepository;
+
+    public List<RoomResponseDTO> findAll() {
+        return roomRepository.findAll().stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<RoomResponseDTO> findById(Long id) {
+        return roomRepository.findById(id)
+                .map(this::toResponseDTO);
+    }
+
+    public List<RoomResponseDTO> findByHotelId(Long hotelId) {
+        return roomRepository.findByHotelId(hotelId).stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public RoomResponseDTO create(CreateRoomDTO dto) {
+        if (roomRepository.existsByCode(dto.code())) {
+            throw new RuntimeException("Room code already exists: " + dto.code());
+        }
+
+        Room room = new Room();
+        room.setCode(dto.code());
+        room.setSize(dto.size());
+        room.setPersonQuantity(dto.personQuantity());
+        room.setState(dto.state());
+
+        Hotel hotel = hotelRepository.findById(dto.hotelId())
+                .orElseThrow(() -> new ResourceNotFoundException("Hotel", dto.hotelId()));
+        room.setHotel(hotel);
+
+        Room saved = roomRepository.save(room);
+        return toResponseDTO(saved);
+    }
+
+    @Transactional
+    public Optional<RoomResponseDTO> update(Long id, UpdateRoomDTO dto) {
+        return roomRepository.findById(id)
+                .map(existing -> {
+                    if (dto.code() != null) existing.setCode(dto.code());
+                    if (dto.size() != null) existing.setSize(dto.size());
+                    if (dto.personQuantity() != null) existing.setPersonQuantity(dto.personQuantity());
+                    if (dto.state() != null) existing.setState(dto.state());
+                    if (dto.hotelId() != null) {
+                        Hotel hotel = hotelRepository.findById(dto.hotelId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Hotel", dto.hotelId()));
+                        existing.setHotel(hotel);
+                    }
+                    return toResponseDTO(roomRepository.save(existing));
+                });
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        roomRepository.deleteById(id);
+    }
+
+    private RoomResponseDTO toResponseDTO(Room room) {
+        return new RoomResponseDTO(
+                room.getId(),
+                room.getCode(),
+                room.getSize(),
+                room.getPersonQuantity(),
+                room.getState(),
+                room.getHotel() != null ? room.getHotel().getId() : null,
+                room.getHotel() != null ? room.getHotel().getName() : null
+        );
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/java/com/hotel/app/service/UserService.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app.service;
+
+import com.hotel.app.dto.request.CreateUserDTO;
+import com.hotel.app.dto.request.UpdateUserDTO;
+import com.hotel.app.dto.request.LoginRequestDTO;
+import com.hotel.app.dto.response.AuthResponseDTO;
+import com.hotel.app.dto.response.UserResponseDTO;
+import com.hotel.app.model.User;
+import com.hotel.app.repository.UserRepository;
+import org.springframework.security.crypto.password;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;  // ✅ final para Lombok
+
+    public List<UserResponseDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<UserResponseDTO> findById(Long id) {
+        return userRepository.findById(id)
+                .map(this::toResponseDTO);
+    }
+
+    @Transactional
+    public UserResponseDTO create(CreateUserDTO dto) {
+        if (userRepository.existsByEmail(dto.email())) {
+            throw new RuntimeException("Email already exists: " + dto.email());
+        }
+        if (userRepository.existsByUsername(dto.username())) {
+            throw new RuntimeException("Username already exists: " + dto.username());
+        }
+
+        User user = new User();
+        user.setName(dto.name());
+        user.setEmail(dto.email());
+        user.setUsername(dto.username());
+        user.setPassword(passwordEncoder.encode(dto.password()));  // ✅ Usando el bean
+        user.setUserType(dto.userType());
+
+        User saved = userRepository.save(user);
+        return toResponseDTO(saved);
+    }
+
+    @Transactional
+    public Optional<UserResponseDTO> update(Long id, UpdateUserDTO dto) {
+        return userRepository.findById(id)
+                .map(existing -> {
+                    if (dto.name() != null) existing.setName(dto.name());
+                    if (dto.email() != null) existing.setEmail(dto.email());
+                    if (dto.username() != null) existing.setUsername(dto.username());
+                    if (dto.password() != null) existing.setPassword(passwordEncoder.encode(dto.password()));
+                    if (dto.userType() != null) existing.setUserType(dto.userType());
+                    return toResponseDTO(userRepository.save(existing));
+                });
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public AuthResponseDTO login(LoginRequestDTO dto) {
+        return userRepository.findByEmail(dto.email())
+                .filter(user -> passwordEncoder.matches(dto.password(), user.getPassword()))
+                .map(user -> new AuthResponseDTO(
+                        user.getId(), user.getUsername(), user.getEmail(),
+                        user.getUserType().name(), "Login successful", true))
+                .orElse(new AuthResponseDTO(
+                        null, null, null, null, "Invalid credentials", false));
+    }
+
+    private UserResponseDTO toResponseDTO(User user) {
+        return new UserResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getUsername(),
+                user.getUserType(),
+                user.getHotels() != null ? user.getHotels().size() : 0,
+                0
+        );
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/resources/application.yaml
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+spring:
+  application:
+    name: hotel-app
+  datasource:
+    url: jdbc:mysql://localhost:3399/hotel_db
+    username: hotel_user
+    password: secret
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  springdoc:
+    api-docs:
+      enabled: true
+    swagger-ui:
+      path: /swagger-ui.html
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/main/resources/schema.sql
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+CREATE TABLE IF NOT EXISTS users (
+                                     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                     name VARCHAR(100) NOT NULL,
+                                     email VARCHAR(100) UNIQUE NOT NULL,
+                                     username VARCHAR(50) UNIQUE NOT NULL,
+                                     password VARCHAR(255) NOT NULL,
+                                     user_type ENUM('GUEST', 'ADMINISTRATOR') NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS hotels (
+                                      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                      name VARCHAR(100) NOT NULL,
+                                      code VARCHAR(50) UNIQUE NOT NULL,
+                                      room_quantity INT NOT NULL,
+                                      administrator_id BIGINT,
+                                      FOREIGN KEY (administrator_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS rooms (
+                                     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                     code VARCHAR(50) UNIQUE NOT NULL,
+                                     size VARCHAR(50) NOT NULL,
+                                     person_quantity INT NOT NULL,
+                                     state ENUM('AVAILABLE', 'OCCUPIED') NOT NULL,
+                                     hotel_id BIGINT NOT NULL,
+                                     FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS reservations (
+                                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                            code VARCHAR(50) UNIQUE NOT NULL,
+                                            reservation_date DATE NOT NULL,
+                                            user_id BIGINT NOT NULL,
+                                            room_id BIGINT NOT NULL,
+                                            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                                            FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS data_recovery (
+                                             id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                             reservation_id BIGINT NOT NULL,
+                                             user_id BIGINT NOT NULL,
+                                             occupation_date DATE NOT NULL,
+                                             FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
+                                             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/test/java/com/hotel/app/AppApplicationTests.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app;
+
+// ✅ IMPORTS CORREGIDOS: Todos en inglés, consistentes con el modelo
+import com.hotel.app.model.Room;
+import com.hotel.app.model.Hotel;
+import com.hotel.app.model.Reservation;
+import com.hotel.app.model.User;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.MySQLContainer;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class AppApplicationTests {
+
+    @LocalServerPort
+    private String port;
+
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
+    // ✅ TestContainer para MySQL (se mantiene)
+    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0");
+
+    @Test
+    void contextLoads() {
+        // Verifica que el contexto de Spring se inicializa correctamente
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        mysql.start();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        mysql.stop();
+    }
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", mysql::getJdbcUrl);
+        registry.add("spring.datasource.username", mysql::getUsername);
+        registry.add("spring.datasource.password", mysql::getPassword);
+    }
+
+    // ✅ TEST CORREGIDO: GET /api/v1/rooms retorna lista vacía
+    @Test
+    void testRoomsReturnsEmptyList() {
+        ResponseEntity<Room[]> response = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                Room[].class
+        );
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Room[] body = response.getBody();
+        assertThat(body).isEmpty();
+    }
+
+    // ✅ TEST CORREGIDO: CRUD completo de Rooms con nombres en inglés
+    @Test
+    void createAndDeleteRoom() {
+        // 1. GET - verificar lista vacía
+        ResponseEntity<Room[]> getResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                Room[].class
+        );
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(getResponse.getBody()).isEmpty();
+
+        // 2. POST - crear habitación
+        Room room = new Room();
+        room.setCode("101");                      // ✅ setCodigo → setCode
+        room.setSize("Double");                    // ✅ setTamanio → setSize
+        room.setPersonQuantity(3);                 // ✅ setCantidadPersonas → setPersonQuantity
+        room.setState(Room.RoomState.AVAILABLE);   // ✅ DISPONIBLE → AVAILABLE
+
+        HttpEntity<Room> roomRequest = new HttpEntity<>(room);
+        ResponseEntity<Room> createResponse = testRestTemplate.postForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                roomRequest,
+                Room.class
+        );
+
+        // ✅ CREATE debe retornar 201 Created (no 200 OK)
+        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+        Room createdRoom = createResponse.getBody();
+        assertThat(createdRoom).isNotNull();
+        assertThat(createdRoom.getId()).isNotNull();
+        assertThat(createdRoom.getCode()).isEqualTo("101");
+        assertThat(createdRoom.getPersonQuantity()).isEqualTo(3);
+        assertThat(createdRoom.getSize()).isEqualTo("Double");
+        assertThat(createdRoom.getState()).isEqualTo(Room.RoomState.AVAILABLE);
+
+        // 3. GET by ID - verificar que se creó
+        ResponseEntity<Room> getByidResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                Room.class,
+                createdRoom.getId()
+        );
+        assertThat(getByidResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Room fetchedRoom = getByidResponse.getBody();
+        assertThat(fetchedRoom).isNotNull();
+        assertThat(fetchedRoom.getId()).isEqualTo(createdRoom.getId());
+        assertThat(fetchedRoom.getCode()).isEqualTo("101");
+
+        // 4. DELETE - eliminar habitación
+        testRestTemplate.delete(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                createdRoom.getId()
+        );
+
+        // 5. GET by ID - verificar que fue eliminado (404 Not Found)
+        ResponseEntity<Room> afterDeleteResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                Room.class,
+                createdRoom.getId()
+        );
+        assertThat(afterDeleteResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+}
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+📄 FILE: src/test/java/com/hotel/app/TestAppApplication.java
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+package com.hotel.app;
+
+import org.springframework.boot.SpringApplication;
+import org.testcontainers.utility.TestcontainersConfiguration;
+
+public class TestAppApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.from(AppApplication::main).with(TestcontainersConfiguration.class).run(args);
+	}
+
+}
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+✅ END - Files: 41
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-

@@ -1,6 +1,11 @@
 package com.hotel.app;
 
-import com.hotel.app.model.Habitacion;
+// ✅ IMPORTS CORREGIDOS: Todos en inglés, consistentes con el modelo
+import com.hotel.app.model.Room;
+import com.hotel.app.model.Hotel;
+import com.hotel.app.model.Reservation;
+import com.hotel.app.model.User;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,11 +33,13 @@ class AppApplicationTests {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8");
+    // ✅ TestContainer para MySQL (se mantiene)
+    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0");
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+        // Verifica que el contexto de Spring se inicializa correctamente
+    }
 
     @BeforeAll
     static void beforeAll() {
@@ -51,51 +58,78 @@ class AppApplicationTests {
         registry.add("spring.datasource.password", mysql::getPassword);
     }
 
+    // ✅ TEST CORREGIDO: GET /api/v1/rooms retorna lista vacía
     @Test
-    void testHabitacionesRetornaListaVacia() {
-        ResponseEntity<Habitacion[]> response = testRestTemplate.getForEntity("http://localhost:" + port + "/habitaciones", Habitacion[].class);
+    void testRoomsReturnsEmptyList() {
+        ResponseEntity<Room[]> response = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                Room[].class
+        );
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Habitacion[] body = response.getBody();
+        Room[] body = response.getBody();
         assertThat(body).isEmpty();
     }
 
+    // ✅ TEST CORREGIDO: CRUD completo de Rooms con nombres en inglés
     @Test
-    void crearBorrarHabitciones() {
-        // get empty
-        ResponseEntity<Habitacion[]> response = testRestTemplate.getForEntity("http://localhost:" + port + "/habitaciones", Habitacion[].class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Habitacion[] body = response.getBody();
-        assertThat(body).isEmpty();
+    void createAndDeleteRoom() {
+        // 1. GET - verificar lista vacía
+        ResponseEntity<Room[]> getResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                Room[].class
+        );
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(getResponse.getBody()).isEmpty();
 
-        // create
-        Habitacion habitacion = new Habitacion();
-        habitacion.setCodigo("101");
-        habitacion.setTamanio("??");
-        habitacion.setCantidadPersonas(3);
-        habitacion.setState(Room.RoomState.DISPONIBLE);
-        var habitacionRequest = new HttpEntity<>(habitacion);
-        ResponseEntity<Habitacion> habitacionResponseEntity = testRestTemplate.postForEntity("http://localhost:" + port + "/habitaciones", habitacionRequest, Habitacion.class);
-        assertThat(habitacionResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Habitacion bodyHabitacion = habitacionResponseEntity.getBody();
-        assertThat(bodyHabitacion.getId()).isNotNull();
-        assertThat(bodyHabitacion.getCodigo()).isEqualTo(habitacion.getCodigo());
-        assertThat(bodyHabitacion.getCantidadPersonas()).isEqualTo(habitacion.getCantidadPersonas());
-        assertThat(bodyHabitacion.getTamanio()).isEqualTo(habitacion.getTamanio());
+        // 2. POST - crear habitación
+        Room room = new Room();
+        room.setCode("101");                      // ✅ setCodigo → setCode
+        room.setSize("Double");                    // ✅ setTamanio → setSize
+        room.setPersonQuantity(3);                 // ✅ setCantidadPersonas → setPersonQuantity
+        room.setState(Room.RoomState.AVAILABLE);   // ✅ DISPONIBLE → AVAILABLE
 
-        // get
-        ResponseEntity<Habitacion> habitacionResponseEntity2 = testRestTemplate.getForEntity("http://localhost:" + port + "/habitaciones/{id}", Habitacion.class, bodyHabitacion.getId());
-        assertThat(habitacionResponseEntity2.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Habitacion bodyHabitacion2 = habitacionResponseEntity2.getBody();
-        assertThat(bodyHabitacion2.getId()).isEqualTo(bodyHabitacion.getId());
-        assertThat(bodyHabitacion2.getCodigo()).isEqualTo(habitacion.getCodigo());
-        assertThat(bodyHabitacion2.getCantidadPersonas()).isEqualTo(habitacion.getCantidadPersonas());
-        assertThat(bodyHabitacion2.getTamanio()).isEqualTo(habitacion.getTamanio());
+        HttpEntity<Room> roomRequest = new HttpEntity<>(room);
+        ResponseEntity<Room> createResponse = testRestTemplate.postForEntity(
+                "http://localhost:" + port + "/api/v1/rooms",
+                roomRequest,
+                Room.class
+        );
 
-        // delete
-        testRestTemplate.delete("http://localhost:" + port + "/habitaciones/{id}", bodyHabitacion.getId());
+        // ✅ CREATE debe retornar 201 Created (no 200 OK)
+        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        // get
-        ResponseEntity<Habitacion> habitacionResponseEntity3 = testRestTemplate.getForEntity("http://localhost:" + port + "/habitaciones/{id}", Habitacion.class, bodyHabitacion.getId());
-        assertThat(habitacionResponseEntity3.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        Room createdRoom = createResponse.getBody();
+        assertThat(createdRoom).isNotNull();
+        assertThat(createdRoom.getId()).isNotNull();
+        assertThat(createdRoom.getCode()).isEqualTo("101");
+        assertThat(createdRoom.getPersonQuantity()).isEqualTo(3);
+        assertThat(createdRoom.getSize()).isEqualTo("Double");
+        assertThat(createdRoom.getState()).isEqualTo(Room.RoomState.AVAILABLE);
+
+        // 3. GET by ID - verificar que se creó
+        ResponseEntity<Room> getByidResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                Room.class,
+                createdRoom.getId()
+        );
+        assertThat(getByidResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Room fetchedRoom = getByidResponse.getBody();
+        assertThat(fetchedRoom).isNotNull();
+        assertThat(fetchedRoom.getId()).isEqualTo(createdRoom.getId());
+        assertThat(fetchedRoom.getCode()).isEqualTo("101");
+
+        // 4. DELETE - eliminar habitación
+        testRestTemplate.delete(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                createdRoom.getId()
+        );
+
+        // 5. GET by ID - verificar que fue eliminado (404 Not Found)
+        ResponseEntity<Room> afterDeleteResponse = testRestTemplate.getForEntity(
+                "http://localhost:" + port + "/api/v1/rooms/{id}",
+                Room.class,
+                createdRoom.getId()
+        );
+        assertThat(afterDeleteResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 }

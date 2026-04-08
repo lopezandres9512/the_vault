@@ -7,12 +7,14 @@ import com.hotel.app.model.Hotel;
 import com.hotel.app.model.Room;
 import com.hotel.app.repository.HotelRepository;
 import com.hotel.app.repository.RoomRepository;
+import com.hotel.app.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class RoomService {
     public List<RoomResponseDTO> findAll() {
         return roomRepository.findAll().stream()
                 .map(this::toResponseDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public Optional<RoomResponseDTO> findById(Long id) {
@@ -33,22 +35,26 @@ public class RoomService {
     }
 
     public List<RoomResponseDTO> findByHotelId(Long hotelId) {
-        return roomRepository.findAll().stream()
-                .filter(room -> room.getHotel() != null && room.getHotel().getId().equals(hotelId))
+        return roomRepository.findByHotelId(hotelId).stream()
                 .map(this::toResponseDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public RoomResponseDTO create(CreateRoomDTO dto) {
+        if (roomRepository.existsByCode(dto.code())) {
+            throw new RuntimeException("Room code already exists: " + dto.code());
+        }
+
         Room room = new Room();
         room.setCode(dto.code());
         room.setSize(dto.size());
         room.setPersonQuantity(dto.personQuantity());
         room.setState(dto.state());
 
-        hotelRepository.findById(dto.hotelId())
-                .ifPresent(room::setHotel);
+        Hotel hotel = hotelRepository.findById(dto.hotelId())
+                .orElseThrow(() -> new ResourceNotFoundException("Hotel", dto.hotelId()));
+        room.setHotel(hotel);
 
         Room saved = roomRepository.save(room);
         return toResponseDTO(saved);
@@ -58,19 +64,15 @@ public class RoomService {
     public Optional<RoomResponseDTO> update(Long id, UpdateRoomDTO dto) {
         return roomRepository.findById(id)
                 .map(existing -> {
-                    existing.setCode(dto.code());
-                    existing.setSize(dto.size());
-                    existing.setPersonQuantity(dto.personQuantity());
-
-                    if (dto.state() != null) {
-                        existing.setState(dto.state());
-                    }
-
+                    if (dto.code() != null) existing.setCode(dto.code());
+                    if (dto.size() != null) existing.setSize(dto.size());
+                    if (dto.personQuantity() != null) existing.setPersonQuantity(dto.personQuantity());
+                    if (dto.state() != null) existing.setState(dto.state());
                     if (dto.hotelId() != null) {
-                        hotelRepository.findById(dto.hotelId())
-                                .ifPresent(existing::setHotel);
+                        Hotel hotel = hotelRepository.findById(dto.hotelId())
+                                .orElseThrow(() -> new ResourceNotFoundException("Hotel", dto.hotelId()));
+                        existing.setHotel(hotel);
                     }
-
                     return toResponseDTO(roomRepository.save(existing));
                 });
     }
