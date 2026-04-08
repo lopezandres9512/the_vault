@@ -25,7 +25,7 @@ public class DataRecoveryService {
     private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
 
-    // ✅ CORREGIDO: Declara y retorna List<DTO>
+
     public List<DataRecoveryResponseDTO> findAll() {
         return dataRecoveryRepository.findAll().stream()
                 .map(this::toResponseDTO)
@@ -58,7 +58,7 @@ public class DataRecoveryService {
         dataRecoveryRepository.deleteById(id);
     }
 
-    // ✅ MAPPER: Entity → DTO
+
     private DataRecoveryResponseDTO toResponseDTO(DataRecovery entity) {
         return new DataRecoveryResponseDTO(
                 entity.getId(),

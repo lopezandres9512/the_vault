@@ -73,7 +73,7 @@ class AppApplicationTests {
 
     @Test
     void createAndDeleteRoom() {
-        // 1. GET - verificar lista vacía
+
         ResponseEntity<Room[]> getResponse = testRestTemplate.getForEntity(
                 "http://localhost:" + port + "/api/v1/rooms",
                 Room[].class
@@ -81,12 +81,12 @@ class AppApplicationTests {
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(getResponse.getBody()).isEmpty();
 
-        // 2. POST - crear habitación
+
         Room room = new Room();
-        room.setCode("101");                      // ✅ setCodigo → setCode
-        room.setSize("Double");                    // ✅ setTamanio → setSize
-        room.setPersonQuantity(3);                 // ✅ setCantidadPersonas → setPersonQuantity
-        room.setState(Room.RoomState.AVAILABLE);   // ✅ DISPONIBLE → AVAILABLE
+        room.setCode("101");
+        room.setSize("Double");
+        room.setPersonQuantity(3);
+        room.setState(Room.RoomState.AVAILABLE);
 
         HttpEntity<Room> roomRequest = new HttpEntity<>(room);
         ResponseEntity<Room> createResponse = testRestTemplate.postForEntity(
